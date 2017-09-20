@@ -1,14 +1,14 @@
 const graphqlHTTP = require('express-graphql');
 const winston = require('winston');
 
-const expressPromise = require('./express');
-const graphqlSchemaPromise = require('./graphqlSchema');
+const expressInitializer = require('./express');
+const graphqlSchemaInitializer = require('./graphqlSchema');
 const db = require('../db');
 
 const bearerRegex = /Bearer\s(\S+)/;
 
 async function init() {
-  const [app, graphqlSchema] = await Promise.all([expressPromise, graphqlSchemaPromise]);
+  const [app, graphqlSchema] = await Promise.all([expressInitializer, graphqlSchemaInitializer]);
 
   app.use('/graphql', (req, res, next) => {
     let currentUser;
@@ -16,11 +16,12 @@ async function init() {
     const authorizationMatchs = authorizationHeader.match(bearerRegex);
     if (authorizationMatchs && authorizationMatchs.length) {
       const token = authorizationMatchs[1];
-      currentUser = db.users.find(user => user.token === token);
+      currentUser = db.users.data.find(user => user.token === token);
     }
     if (!currentUser) {
       currentUser = false;
     }
+    currentUser.profile = db.profiles.data.find(profile => profile.userId === currentUser.id);
     req.user = currentUser;
     next();
   });
@@ -40,6 +41,7 @@ async function init() {
       context: {
         db,
         currentUser: req.user,
+        baseUrl: `${req.protocol}://${req.get('host')}`,
       },
     })(req, res)
   ));

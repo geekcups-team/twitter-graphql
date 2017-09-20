@@ -3,7 +3,13 @@ const tweets = require('./tweets');
 const profiles = require('./profiles');
 
 module.exports = {
-  users,
-  tweets,
-  profiles,
+  users: {
+    data: users,
+  },
+  tweets: {
+    data: tweets,
+  },
+  profiles: {
+    data: profiles,
+  },
 };
