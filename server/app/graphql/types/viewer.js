@@ -18,7 +18,8 @@ const viewerType = new graphql.GraphQLObjectType({
           tweets = context.db.tweets.data;
         }
         else {
-          tweets = context.db.tweets.data.find(t => context.currentUser.follows.include(t.userId));
+          tweets = context.db.tweets.data
+            .filter(t => context.currentUser.follows.include(t.userId));
         }
         return tweets.sort((a, b) => (a < b ? -1 : 1));
       },
