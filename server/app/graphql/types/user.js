@@ -31,6 +31,10 @@ const userType = new graphql.GraphQLObjectType({
       type: new graphql.GraphQLNonNull(graphql.GraphQLString),
       resolve: (root, args, context) => `${context.baseUrl}/assets/covers/${root.username}.jpg`,
     },
+    tweets: {
+      type: new graphql.GraphQLList(require('./tweet')), // eslint-disable-line global-require
+      resolve: (root, args, context) => context.db.tweets.data.find(t => t.userId === root.id),
+    },
   }),
 });
 
