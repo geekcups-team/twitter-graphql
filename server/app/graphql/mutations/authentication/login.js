@@ -3,7 +3,7 @@ const graphql = require('graphql');
 const name = 'Login';
 
 const mutateAndGetPayload = ({ username, password }, context) => {
-  const user = context.db.users.find(u => u.username === username && u.password === password);
+  const user = context.db.users.data.find(u => u.username === username && u.password === password);
 
   if (!user) throw new Error('Invalid credentials');
 
