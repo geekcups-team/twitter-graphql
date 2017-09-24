@@ -1,8 +1,8 @@
 import React from 'react';
 import { withStyles } from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
+
+import Header from './Header';
 
 const styles = theme => ({
   root: {
@@ -25,13 +25,7 @@ class App extends React.Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography type="title" color="inherit" noWrap>
-              Twitter
-            </Typography>
-          </Toolbar>
-        </AppBar>
+        <Header />
         <main className={classes.content}>
           <Typography type="body1" noWrap>
             {'You think water moves fast? You should see ice.'}
