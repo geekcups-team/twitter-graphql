@@ -1,8 +1,7 @@
 const graphql = require('graphql');
 const { fromGlobalId } = require('graphql-relay');
-const tweetType = require('../../types/tweet');
 
-const name = 'TweetUpvote';
+const name = 'TweetDownvote';
 
 const wait = () => (
   new Promise(resolve => setTimeout(() => resolve(), 3000))
@@ -17,9 +16,9 @@ const mutateAndGetPayload = async ({ id: globalId }, context) => {
   if (!tweet) throw new Error('Tweet not found', globalId);
 
   await wait();
-  tweet.likeCount += 1;
+  tweet.likeCount -= tweet.likeCount === 0 ? 0 : 1;
   return {
-    tweet,
+    likeCount: tweet.likeCount,
   };
 };
 
@@ -30,8 +29,8 @@ const inputFields = {
 };
 
 const outputFields = {
-  tweet: {
-    type: new graphql.GraphQLNonNull(tweetType),
+  likeCount: {
+    type: new graphql.GraphQLNonNull(graphql.GraphQLInt),
   },
 };
 

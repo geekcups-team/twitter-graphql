@@ -8,6 +8,10 @@ const userType = new graphql.GraphQLObjectType({
   interfaces: [nodeInterface],
   fields: () => ({
     id: globalIdField(),
+    username: {
+      type: new graphql.GraphQLNonNull(graphql.GraphQLString),
+      resolve: root => root.username,
+    },
     name: {
       type: new graphql.GraphQLNonNull(graphql.GraphQLString),
       resolve: (root, args, context) => {
@@ -40,7 +44,7 @@ const userType = new graphql.GraphQLObjectType({
       type: new graphql.GraphQLList(require('./tweet')), // eslint-disable-line global-require
       resolve: (root, args, context) => context.db.tweets.data
         .filter(t => t.userId === root.id)
-        .sort((a, b) => (a < b ? -1 : 1)),
+        .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1)),
     },
     follows: {
       type: new graphql.GraphQLList(require('./user')), // eslint-disable-line global-require
