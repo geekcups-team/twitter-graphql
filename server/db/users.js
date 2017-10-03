@@ -20,4 +20,11 @@ module.exports = [
     token: 'razzi_token',
     follows: ['donald_id', 'kim_id'],
   },
+  {
+    id: 'albano_id',
+    username: 'albano',
+    password: 'password',
+    token: 'albano_token',
+    follows: ['kim_id', 'razzi_id'],
+  },
 ];

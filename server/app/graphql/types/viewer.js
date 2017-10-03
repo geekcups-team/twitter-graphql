@@ -1,5 +1,5 @@
 const graphql = require('graphql');
-const { globalIdField } = require('graphql-relay');
+const { globalIdField, fromGlobalId } = require('graphql-relay');
 
 const { nodeInterface } = require('../interfaces/node');
 const userType = require('./user');
@@ -19,9 +19,36 @@ const viewerType = new graphql.GraphQLObjectType({
         }
         else {
           tweets = context.db.tweets.data
-            .filter(t => context.currentUser.follows.include(t.userId));
+            .filter(t => context.currentUser.follows.includes(t.userId));
         }
-        return tweets.sort((a, b) => (a < b ? -1 : 1));
+        return tweets.sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
+      },
+    },
+    user: {
+      type: new graphql.GraphQLNonNull(userType),
+      args: {
+        id: {
+          type: new graphql.GraphQLNonNull(graphql.GraphQLID),
+        },
+      },
+      resolve: (root, args, context) => {
+        const { id } = fromGlobalId(args.id);
+        return context.db.users.data.find(u => u.id === id);
+      },
+    },
+    suggestedUsers: {
+      type: new graphql.GraphQLList(userType),
+      resolve: (root, args, context) => {
+        let users;
+        if (!context.currentUser) {
+          users = context.db.users.data;
+        }
+        else {
+          users = context.db.users.data
+            .filter(u => (context.currentUser.id !== u.id &&
+              !context.currentUser.follows.includes(u.id)));
+        }
+        return users;
       },
     },
     me: {

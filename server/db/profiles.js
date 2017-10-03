@@ -14,7 +14,13 @@ module.exports = [
   {
     id: 'razzi_id',
     name: 'Antonio Razzi',
-    bio: 'Senator of the Italian Republic',
+    bio: 'Senator of the Italian Republic, te lo dico da amico, fatti li cazzi tua',
     userId: 'razzi_id',
+  },
+  {
+    id: 'albano_id',
+    name: 'Albano Carrisi',
+    bio: 'Felicità è tenersi per mano andare lontano, la felicità è il tuo sguardo innocente in mezzo alla gente, la felicità è mangiare un panino con dentro un bambino...la felicità',
+    userId: 'albano_id',
   },
 ];

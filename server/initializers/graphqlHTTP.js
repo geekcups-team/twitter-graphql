@@ -13,16 +13,21 @@ async function init() {
   app.use('/graphql', (req, res, next) => {
     let currentUser;
     const authorizationHeader = req.headers.authorization;
-    const authorizationMatchs = authorizationHeader.match(bearerRegex);
-    if (authorizationMatchs && authorizationMatchs.length) {
-      const token = authorizationMatchs[1];
-      currentUser = db.users.data.find(user => user.token === token);
+    if (authorizationHeader) {
+      const authorizationMatchs = authorizationHeader.match(bearerRegex);
+      if (authorizationMatchs && authorizationMatchs.length) {
+        const token = authorizationMatchs[1];
+        currentUser = db.users.data.find(user => user.token === token);
+      }
+      if (!currentUser) {
+        currentUser = false;
+      }
+      currentUser.profile = db.profiles.data.find(profile => profile.userId === currentUser.id);
+      req.user = currentUser;
     }
-    if (!currentUser) {
-      currentUser = false;
+    else {
+      req.user = false;
     }
-    currentUser.profile = db.profiles.data.find(profile => profile.userId === currentUser.id);
-    req.user = currentUser;
     next();
   });
 
