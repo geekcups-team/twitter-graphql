@@ -3,7 +3,7 @@
 
 ---
 
-## Agenda
+# Agenda
 
 * Dove vogliamo arrivare
 * Cos'è GraphQL
@@ -13,11 +13,11 @@
 
 ---
 
-## Dove vogliamo arrivare
+# Obiettivo
 
-### Vogliamo creare un mini clone di Twitter
+## Vogliamo creare un mini clone di Twitter
 
-### [Twitter Geekcups](http://twitter.geekcups.com)
+[Twitter Geekcups](http://twitter.geekcups.com)
 
 ---
 
@@ -37,26 +37,26 @@
 
 ## Cos'è GraphQL
 
-### GraphQL è un Query Language (QL) per recuperare dati come SQL. Non è quindi per nessun linguaggio, framework o storage specifico.
+### è un Query Language (QL) per recuperare dati come SQL.
+### Non è quindi specifico per un particolare linguaggio, framework o storage.
 
 ---
 
 ## Implementazione server GraphQL
 
-### Ha solitamente un unico endpoint dove vengono eseguite tutte le query. Non esistono verbi o resources come in un architettura REST.
+### Ha solitamente un unico endpoint dove vengono eseguite tutte le query.
+### Non esistono verbi o resources come in un architettura REST.
 
 ---
 
-## Cos'è GraphQL
+## Types e Fields (La struttura GraphQL)
 
-### La struttura dati da interrogare è un grafo che ha diversi "types" che specificano i "fields" che li compongono
-
+### La struttura dati da interrogare è un "grafo"<br> le cui foglie sono istanze di diversi "types"<br> composti a loro volta di "fields"
 ---
 
 ## Types e Fields
 
 ```
-
 type Tweet {
   id: ID!
   text: String!
@@ -71,28 +71,25 @@ type User {
   tweets: [Tweet]
   ...
 }
-
 ```
 
 ---
 
 ## Il Viewer
 
-### Il viewer è un "type" particolare che non è definito nelle specifiche di GraphQL, ma viene usato per convenzione per identificare "chi sta guardando il grafo"
+### è un "type" particolare che non è definito nelle specifiche di GraphQL, ma viene usato per convenzione per identificare "chi sta guardando il grafo"
 
 ---
 
 ## Il Viewer
 
 ```
-
 type Viewer {
   id: ID!
   feed: [Tweet]
   suggestedUsers: [User]
   ...
 }
-
 ```
 
 ---
@@ -102,28 +99,31 @@ type Viewer {
 ### Ogni field, oltre a definire il tipo, può definire degli argomenti opzionali
 
 ```
-
 type Viewer {
   ...
   user(id: ID!): User!
   ...
 }
-
 ```
 
 ---
 
 ## Come accedere al grafo
 
-* Query - recupero nodi (ex GET)
-* Mutation - modifica nodi (ex POST/PUT/PATCH/DELETE)
-* Subscription - recupero dati real-time ("ex websocket")
+* Query - recupero nodi<br>
+ (ex GET)
+
+* Mutation - modifica nodi<br>
+ (ex POST/PUT/PATCH/DELETE)
+
+* Subscription - recupero dati real-time<br>
+ ("ex websocket")
 
 ---
 
 ## Come risponde il server
 
-### Data una query GraphQL, il server risponde esattamente quello che gli è stato chiesto
+#### Data una query GraphQL, il server risponde esattamente quello che gli è stato chiesto
 
 ---
 
@@ -189,4 +189,4 @@ fragment infoUser on User {
 ## Killer app
 
 ### Graph*i*QL
-![GraphiQL logo](https://avatars2.githubusercontent.com/u/12972006?v=4&s=400)
+![Graphiql](https://avatars2.githubusercontent.com/u/12972006?v=4&s=400)
