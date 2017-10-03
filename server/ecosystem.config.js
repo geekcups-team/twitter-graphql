@@ -5,7 +5,7 @@ module.exports = {
       script: 'server/app.js',
       interpreter: 'node@8.5.0',
       env: {
-        EXPRESS_PORT: 3010,
+        EXPRESS_PORT: 3100,
       },
     },
   ],
@@ -20,7 +20,7 @@ module.exports = {
       'post-deploy': '/home/deployer/.nvm/versions/node/v6.10.0/bin/npm install && /home/deployer/.nvm/versions/node/v6.10.0/lib/node_modules/pm2/bin/pm2 startOrRestart server/ecosystem.config.js --env production',
       env: {
         NODE_ENV: 'production',
-        EXPRESS_PORT: 3010,
+        EXPRESS_PORT: 3100,
       },
     },
   },
