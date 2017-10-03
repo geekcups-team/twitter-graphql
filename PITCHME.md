@@ -21,7 +21,7 @@
 
 ---
 
-## Dove vogliamo arrivare in REST
+## In REST avremmo ~
 
 ```
  GET /api/v1/me
@@ -37,7 +37,7 @@
 
 ## Cos'è GraphQL
 
-### è un Query Language (QL) per recuperare dati come SQL.
+### è un Query Language (QL) per recuperare dati, come SQL.
 ### Non è quindi specifico per un particolare linguaggio, framework o storage.
 
 ---
@@ -49,9 +49,9 @@
 
 ---
 
-## Types e Fields (La struttura GraphQL)
+## La struttura GraphQL
 
-### La struttura dati da interrogare è un "grafo"<br> le cui foglie sono istanze di diversi "types"<br> composti a loro volta di "fields"
+### La struttura dati da interrogare è un *grafo*<br> le cui foglie sono istanze di diversi *types*<br> composti a loro volta di *fields*
 ---
 
 ## Types e Fields
@@ -77,7 +77,7 @@ type User {
 
 ## Il Viewer
 
-### è un "type" particolare che non è definito nelle specifiche di GraphQL, ma viene usato per convenzione per identificare "chi sta guardando il grafo"
+### è un *type* particolare che non è definito nelle specifiche di GraphQL, ma viene usato per convenzione per identificare *chi sta guardando il grafo*
 
 ---
 
@@ -111,13 +111,13 @@ type Viewer {
 ## Come accedere al grafo
 
 * Query - recupero nodi<br>
- (ex GET)
+ (*ex GET*)
 
 * Mutation - modifica nodi<br>
- (ex POST/PUT/PATCH/DELETE)
+ (*ex POST/PUT/PATCH/DELETE*)
 
 * Subscription - recupero dati real-time<br>
- ("ex websocket")
+ (*ex websocket*)
 
 ---
 
