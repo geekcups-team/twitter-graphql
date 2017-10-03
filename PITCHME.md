@@ -3,7 +3,7 @@
 
 ---
 
-# Agenda
+## Agenda
 
 * Dove vogliamo arrivare
 * Cos'è GraphQL
@@ -13,11 +13,13 @@
 
 ---
 
-# Dove vogliamo arrivare
+## Dove vogliamo arrivare
 
 ### Vogliamo creare un mini clone di Twitter
 
 ### [Twitter Geekcups](http://twitter.geekcups.com)
+
+---
 
 # Dove vogliamo arrivare in REST
 
@@ -37,9 +39,9 @@
 
 ---
 
-## Cos'è GraphQL
+## Implementazione server GraphQL
 
-### Ha solitamente un unico endpoint dove vengono eseguite tutte le query. Non esistono verbi o resources con in un architettura REST.
+### Ha solitamente un unico endpoint dove vengono eseguite tutte le query. Non esistono verbi o resources come in un architettura REST.
 
 ---
 
@@ -91,6 +93,8 @@ type Viewer {
 
 ```
 
+---
+
 ## Arguments
 
 ### Ogni field, oltre a definire il tipo, può definire degli argomenti opzionali
@@ -119,9 +123,10 @@ type Viewer {
 
 ### Data una query GraphQL, il server risponde esattamente quello che gli è stato chiesto
 
-```
-Request:
+---
 
+## Request
+```
 {
   viewer {
     id
@@ -131,9 +136,12 @@ Request:
     }
   }
 }
+```
 
-Response:
+---
 
+## Response
+```
 {
   "data": {
     "viewer": {
@@ -153,6 +161,9 @@ Response:
 
 ### Sono utilizzati per raggruppare i fields richiesti su un particolare type
 
+---
+
+## Esempio Fragment
 ```
 {
   viewer {
