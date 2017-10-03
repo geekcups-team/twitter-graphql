@@ -37,7 +37,7 @@
 
 ## Cos'è GraphQL
 
-### GraphQL è un Query Language (QL) per recuperare dati come SQL. Non è quindi per nessun linguaggio, framework o storage.
+### GraphQL è un Query Language (QL) per recuperare dati come SQL. Non è quindi per nessun linguaggio, framework o storage specifico.
 
 ---
 
