@@ -21,7 +21,7 @@
 
 ---
 
-# Dove vogliamo arrivare in REST
+## Dove vogliamo arrivare in REST
 
 ```
  GET /api/v1/me
@@ -33,7 +33,9 @@
  DELETE /api/v1/tweets/:tweetId/likes
 ```
 
-# Cos'è GraphQL
+---
+
+## Cos'è GraphQL
 
 ### GraphQL è un Query Language (QL) per recuperare dati come SQL. Non è quindi per nessun linguaggio, framework o storage.
 
