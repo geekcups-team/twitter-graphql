@@ -1,0 +1,103 @@
+schema {
+  query: Root
+  mutation: Mutation
+}
+
+# A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
+# `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO
+# 8601 standard for representation of dates and times using the Gregorian calendar.
+scalar DateTime
+
+input LoginInput {
+  username: String!
+  password: String!
+  clientMutationId: String
+}
+
+type LoginPayload {
+  token: String!
+  clientMutationId: String
+}
+
+type Mutation {
+  login(input: LoginInput!): LoginPayload
+  tweetUpvote(input: TweetUpvoteInput!): TweetUpvotePayload
+  tweetDownvote(input: TweetDownvoteInput!): TweetDownvotePayload
+  tweetCreate(input: TweetCreateInput!): TweetCreatePayload
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+type Root {
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+  viewer: Viewer
+}
+
+type Tweet implements Node {
+  # The ID of an object
+  id: ID!
+  text: String!
+  likeCount: Int!
+  createdAt: DateTime!
+  user: User!
+}
+
+input TweetCreateInput {
+  text: String!
+  clientMutationId: String
+}
+
+type TweetCreatePayload {
+  tweet: Tweet!
+  clientMutationId: String
+}
+
+input TweetDownvoteInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type TweetDownvotePayload {
+  likeCount: Int!
+  clientMutationId: String
+}
+
+input TweetUpvoteInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type TweetUpvotePayload {
+  tweet: Tweet!
+  clientMutationId: String
+}
+
+type User implements Node {
+  # The ID of an object
+  id: ID!
+  username: String!
+  name: String!
+  bio: String!
+  avatarUrl: String!
+  coverUrl: String!
+  tweets: [Tweet]
+  follows: [User]
+}
+
+type Viewer implements Node {
+  # The ID of an object
+  id: ID!
+  feed: [Tweet]
+  user(id: ID!): User!
+  suggestedUsers: [User]
+  me: User
+}
+
